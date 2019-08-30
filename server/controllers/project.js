@@ -4,8 +4,7 @@ module.exports = class ProjectController {
     static create (req, res, next) {
         const { name, todos } = req.body
         const users = req.body['users[]']
-        
-        console.log(users)
+    
        Project.create({ name, users, todos })
             .then( project => {
                 res.status(201).json(project)
@@ -14,9 +13,13 @@ module.exports = class ProjectController {
     }
 
     static findAll (req, res, next) {
-       Project.find()
-            .then( projects => {
-                res.status(200).json(projects)
+
+        console.log(req.decoded._id)
+        
+        Project.find()
+        .then( projects => {
+                let userProject = projects.filter(x => x.users.includes(req.decoded._id))
+                res.status(200).json(userProject)
             })
             .catch(next)
     }

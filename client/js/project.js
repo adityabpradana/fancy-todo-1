@@ -13,7 +13,7 @@ $(document).ready(function() {
     .done( users => {
         for(let i in users){
             $('#project-users').append(`
-            <option value="${users[i]._id}">${users[i].username}</option>
+            <option id="${users[i]._id}" value="${users[i]._id}">${users[i].username}</option>
             `)
         }
     })
@@ -27,7 +27,7 @@ $(document).ready(function() {
     $('#add-member-button').on('click', function() {
         if($('#project-users').val()){
             $('#add-member').append(`
-            <button class="btn btn-outline-primary btn-block mt-2">${$('#project-users').text()}</button>
+            <button class="btn btn-outline-primary btn-block mt-2">${$("#project-users option:selected").text()}</button>
             <input class="add-member form-control btn-sm btn-block mt-2" type="hidden" name="user"
             value="${$('#project-users').val()}">
             `)

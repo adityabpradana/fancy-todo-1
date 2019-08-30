@@ -13,7 +13,15 @@ module.exports = class TodoController {
     }
 
     static findAll (req, res, next) {
-        Todo.find({ project_id: req.query.id })
+        let filter = {}
+
+        if(req.query.id){
+            filter.project_id = req.query.id
+        } else {
+            filter.user_id = req.decoded._id
+        }
+
+        Todo.find(filter)
             .then( todos => {
                 res.status(200).json(todos)
             })

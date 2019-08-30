@@ -2,6 +2,7 @@ $(document).ready(function() {
     const baseurl = 'http://localhost:3000/api/todos'
 
     //Fetch To Do
+    console.log('FETCH')
     fetchTodo()
 
     $('#user-projects').on('change', function() {
@@ -61,9 +62,14 @@ $(document).ready(function() {
     })
 
     function fetchTodo(){
+        let url = baseurl
+        if($('#user-projects').val() !== 'All'){
+            url = `${baseurl}?id=${$('#user-projects').val()}`
+        }
+
         $.ajax({
             method: 'GET',
-            url: `${baseurl}?id=${$('#user-projects').val()}`,
+            url,
             headers: {
                 token: localStorage.getItem('token')
             }

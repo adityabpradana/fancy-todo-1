@@ -15,8 +15,8 @@ const todoSchema = new Schema({
     due_date: {
         type: Date
     },
+    project_id: { type: ObjectId, ref: 'Project' },
     user_id: { type: ObjectId, ref: 'User' },
-    project_id: { type: ObjectId, ref: 'Project' }
 }, { timestamps: true })
 
 module.exports = model('Todo', todoSchema)

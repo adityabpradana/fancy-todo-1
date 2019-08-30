@@ -65,6 +65,8 @@ $(document).ready(function() {
         .done( user => {
             localStorage.setItem('token', user.access_token)
             localStorage.setItem('username', user.username)
+            fetchTodo()
+            fetchProject()
             $('#login-button').hide()
             $('.logout').show()
             $('#login-form').hide()
@@ -82,6 +84,7 @@ $(document).ready(function() {
     })
 
     $('#logout-button').on('click', function() {
+        $('#list-todo').empty()
         signOut()
     })
 })
